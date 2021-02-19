@@ -3,13 +3,13 @@ use rand::Rng;
 use std::cmp::Ordering;
 
 fn main() {
-    println!("Guess the number!");
+    println!("Number Guessing Game!");
 
     let secret = rand::thread_rng().gen_range(1, 101);
     // println!("The secret number is: {}", secret);
 
     loop {
-        println!("Please enter your guess!");
+        println!("Please enter your guess! ");
 
         let mut guess = String::new(); // vars default immutable. mut = make it mutable
 
@@ -18,8 +18,6 @@ fn main() {
             .read_line(&mut guess)
             // expect handles potential failure. If ok return value, else raise error.
             .expect("Failed to read line");
-
-        println!("You guessed: {}", guess);
 
         // u32 = unsigned 32-bit number. i32 = signed number. so on for u64, etc.
         // trim() removes white space in the beginning and in the end
