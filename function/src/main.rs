@@ -30,11 +30,14 @@ fn main() {
     
     let mut exp = 1;
     let mut res: u128 = 1;
+    let step = 2;
     let two_to_tenth = loop {
-        res = res * 2;
+        res = (res * step) as u128;
         if exp == 10 {
-            break res * 2
+            break res * step
         }
+        // without this line: panicked 'attempt to multiply with overflow'
+        exp += 1;
     };
     println!("res is: {}", res);
 }
