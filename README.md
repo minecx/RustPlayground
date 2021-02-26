@@ -72,3 +72,8 @@ To-do:
 - Be more familiar with passing strings as function parameters (cannot use
   strings directly since they are not of fixed size, so have to use pointers
   like in C/C++)
+
+Random thoughts
+
+- I heard the next chapter (Ownership) is the most unique and the hardest
+  concept of Rust so wish me luck `:(`
