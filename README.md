@@ -11,7 +11,7 @@ Followed chapter 2 in the book, finished guessing game.
 Liked:
 
 - The `mut` keyword which allows me to control whether each individual variable is mutable or not.
-- Auto type guessing but I can also manually enforce a datatype (like `let guess: u32`). Similar syntax with 
+- Auto type guessing but I can also manually enforce a datatype (like `let guess: u32`). Similar syntax with
 Apple Swift.
 - Pattern matching (likely from Haskell) and I can even do error handling from there!
 - And the Cargo - package manager, builder and runner ALL IN ONE!
@@ -19,7 +19,7 @@ Apple Swift.
 Disliked:
 
 - Used `::` a lot - and my right little finger hurts
-- Not necessarily disliked, but sometimes I can walk away without a `;` when there's only one line in a `{}` block 
+- Not necessarily disliked, but sometimes I can walk away without a `;` when there's only one line in a `{}` block
 while adding more lines will generate compiler error. I think requiring `;` for every line within `{}` block could
 relieve this confusion.
 
@@ -48,7 +48,7 @@ Worth noting:
 
 ## Fed 25
 
-Finished chapter 3 about data types, functions and control flows (loop and 
+Finished chapter 3 about data types, functions and control flows (loop and
 conditions).
 
 Liked:
@@ -56,7 +56,7 @@ Liked:
 - Ternary operator follows a more intuitive format `if _condition_ {true}
   else {false}`.
 - Similar to Apple Swift, need to specify input and output datatype when
-  writing functions. Used `->` for return type in function. 
+  writing functions. Used `->` for return type in function.
 
 Worth noting:
 
@@ -77,3 +77,42 @@ Random thoughts
 
 - I heard the next chapter (Ownership) is the most unique and the hardest
   concept of Rust so wish me luck `:(`
+
+## Feb 26
+
+Ownership
+
+- A variable is valid when it's scope is valid
+- And becomes invalid once it's out of scope
+- So that the memory is automatically returned when something is out of scope
+- At the end of each scope, Rust adds a function for us called `drop` which
+  essentially wipes all variables that **only** lives in this scope
+
+Copying pointer values in Rust
+
+```Rust
+fn main() {
+    let x = 5;
+    let y = x;
+    println!("x is: {}, y is: {}", x, y);
+    // get 5 and 5
+
+    let a = String::from("abc");
+    let b = a;
+    // NOT OK - "Value borrowed after move"
+    println!("a is: {}, b is: {}", a, b);
+}
+```
+
+With things on the heap, we don't want to simply copy over the content since
+that'll be too slow (especially if the data is large), but we also don't want
+multiple pointers to be pointing to the same position and cause thing like
+multiple `free` operation in C.
+
+\
+&nbsp;
+
+Different ways of handling `string` in Rust
+
+- If not mutable (aka `String Literal`), hardcode directly into executable
+- Else (aka `String` type) use pointer and allocate on heap
