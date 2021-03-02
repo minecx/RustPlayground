@@ -39,7 +39,7 @@ fn main() {
         // without this line: panicked 'attempt to multiply with overflow'
         exp += 1;
     };
-    println!("res is: {}", res);
+    println!("res is: {}, 2 to 10th is: {}", res, two_to_tenth);
 }
 
 fn sample_func(i1: i32, i2: u32) { // returns void

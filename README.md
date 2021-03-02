@@ -116,3 +116,37 @@ Different ways of handling `string` in Rust
 
 - If not mutable (aka `String Literal`), hardcode directly into executable
 - Else (aka `String` type) use pointer and allocate on heap
+
+## Mar 1 (Feb 26 Cont'd)
+
+The following stack-only data are *deep-copied* (ownership didn't get
+transferred):
+
+- Integers
+- Boolean
+- Floats
+- Chars
+- Tuples, if all of the data within the tuple are the 4 above types
+
+`Copy` trait: we can still use `a` after `let a = something; let b = a;`
+`Drop` trait: we cannot use `a` after `let a = something; let b = a;`
+
+Returning in functions also transfers ownership! In the following program
+
+``` Rust
+fn main() {
+  println!("hello world!");
+
+  let mut s = String::from("hello");
+  s = take_ownership(s);
+  // without the return statement below this will be compiler error
+  println!("got ownership of string {} back", s);
+}
+
+fn take_ownership(some_s: String) -> String {
+  println!("took ownership of string {}", some_s);
+  some_s // return statement w/o 'return' keyword
+}
+```
+
+Similar to Python, it's possible to return multiple values with tuples.
