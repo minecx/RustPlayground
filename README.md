@@ -150,3 +150,53 @@ fn take_ownership(some_s: String) -> String {
 ```
 
 Similar to Python, it's possible to return multiple values with tuples.
+
+### Borrow
+
+Have reference to one object in a sub-scope while not removing the access to it
+from parent scope.
+
+Can borrow either immutable `&var_name` or mutable reference `&mut var_name`.
+
+Within **one** scope, it's ok to have multiple **immutable** references to one
+object, but can only have **one (1)** mutable reference to one object.
+
+Creating one mutable reference to one object will nullify all immutable
+references to the same object in the same scope.
+
+Some code examples from the book (assume all of these are in `main()`):
+
+```Rust
+let mut s = String::from("hello");
+  {
+    let r1 = &mut s;
+  } // r1 goes out of scope here, so we can make a new reference with no problems.
+
+  let r2 = &mut s;
+
+// -------------------------------------
+
+let mut s = String::from("hello");
+
+let r1 = &s;     // no problem
+let r2 = &s;     // no problem
+let r3 = &mut s; // PROBLEM
+
+// -------------------------------------
+
+let mut s = String::from("hello");
+
+let r1 = &s;     // no problem
+let r2 = &s;     // no problem
+println!("{} and {}", r1, r2);
+// r1 and r2 are no longer used after this point
+
+let r3 = &mut s; // no problem
+println!("{}", r3);
+```
+
+This prevents racing condition of updating variables **at compile time**!
+
+Dangling pointer will be caught by Rust compiler, resulting in an error.
+
+## Continue with 4.3
