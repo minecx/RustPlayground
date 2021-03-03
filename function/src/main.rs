@@ -47,7 +47,7 @@ fn sample_func(i1: i32, i2: u32) { // returns void
 }
 
 fn return_func(in1: i32) -> i32 { // similar to Apple Swift
-    in1 + 10
+    return in1 + 10
 }
 
 fn inf_print(s: &str) {

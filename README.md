@@ -199,4 +199,17 @@ This prevents racing condition of updating variables **at compile time**!
 
 Dangling pointer will be caught by Rust compiler, resulting in an error.
 
-## Continue with 4.3
+## Mar 3
+
+Slice type: a reference to part of a string by tracking the starting and
+ending point. Example of a String Slice below.
+
+```Rust
+let s = String::from("Hello");
+let slice = &s[0..2];
+```
+
+We can think of `..` as `:` in slicing strings in Python where the default
+value of starting point is 0 and ending point is `s.len()` (also exclusive).
+
+Slice type works for other types as well: arrays, etc.
