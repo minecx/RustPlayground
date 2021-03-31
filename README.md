@@ -109,9 +109,6 @@ that'll be too slow (especially if the data is large), but we also don't want
 multiple pointers to be pointing to the same position and cause thing like
 multiple `free` operation in C.
 
-\
-&nbsp;
-
 Different ways of handling `string` in Rust
 
 - If not mutable (aka `String Literal`), hardcode directly into executable
@@ -129,6 +126,7 @@ transferred):
 - Tuples, if all of the data within the tuple are the 4 above types
 
 `Copy` trait: we can still use `a` after `let a = something; let b = a;`
+
 `Drop` trait: we cannot use `a` after `let a = something; let b = a;`
 
 Returning in functions also transfers ownership! In the following program
@@ -213,3 +211,44 @@ We can think of `..` as `:` in slicing strings in Python where the default
 value of starting point is 0 and ending point is `s.len()` (also exclusive).
 
 Slice type works for other types as well: arrays, etc.
+
+## Mar 21
+
+It's been so long :( was busy with final exams and projects but here we are
+again!
+
+Starting with chapter 5 about `struct`s
+
+``` Rust
+let u1 = User { // immutable. use `let mut u1` to make the whole struct mutable
+  username: String::from("xyz123"),
+  active: true,
+};
+
+println!("{}", u1.username); // should give us "xyz123"
+
+let u2 = User {
+  username: String::from("abc456"),
+  ..u1 
+}
+```
+
+I noticed that the following code actually gives us some compiler error (with
+the same `User` struct from above):
+
+```Rust
+let mut u1 = User {
+  username: String::from("xyz123"),
+  email: String::from("example1@email.com"),
+  active: true,
+};
+
+let u2 = User {
+  username: String::from("abc456"),
+  ..u1
+};
+
+println!("u1 email is {}, u2 email is {}.", u1.email, u2.email);
+```
+
+Which seems like Rust is doing ownership transferring with `..u1`.
